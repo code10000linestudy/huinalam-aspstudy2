@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SportStore.Domain.Abstract;
 using SportStore.WebUI.Models;
+using SportStore.WebUI.Modules;
 
 namespace SportStore.WebUI.Controllers
 {
@@ -13,9 +14,10 @@ namespace SportStore.WebUI.Controllers
         private IProductRepository repository;
         public int PageSize = 4;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController()
         {
-            this.repository = productRepository;
+            //this.repository = productRepository;
+            BindManager.SetProduct(ref repository);
         }
 
         // GET: Product

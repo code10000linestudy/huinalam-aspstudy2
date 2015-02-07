@@ -7,6 +7,7 @@ using System.Web.Routing;
 using SportStore.Domain.Abstract;
 using SportStore.Domain.Entities;
 using SportStore.WebUI.Models;
+using SportStore.WebUI.Modules;
 
 namespace SportStore.WebUI.Controllers
 {
@@ -15,10 +16,12 @@ namespace SportStore.WebUI.Controllers
         private IProductRepository repository;
         private IOrderProcessor orderProcessor;
 
-        public CartController(IProductRepository repo, IOrderProcessor proc)
+        public CartController()
         {
-            repository = repo;
-            orderProcessor = proc;
+            BindManager.SetProduct(ref repository);
+            BindManager.SetProduct(ref orderProcessor);
+            //repository = repo;
+            //orderProcessor = proc;
         }
 
         public ViewResult Index(Cart cart, string returnUrl)

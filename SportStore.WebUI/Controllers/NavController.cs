@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SportStore.Domain.Abstract;
+using SportStore.WebUI.Modules;
 
 namespace SportStore.WebUI.Controllers
 {
@@ -11,9 +12,10 @@ namespace SportStore.WebUI.Controllers
     {
         private IProductRepository repository;
 
-        public NavController(IProductRepository repo)
+        public NavController()
         {
-            repository = repo;
+            //repository = repo;
+            BindManager.SetProduct(ref repository);
         }
 
         public PartialViewResult Menu(string category = null)

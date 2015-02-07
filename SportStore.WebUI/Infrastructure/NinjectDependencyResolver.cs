@@ -50,14 +50,15 @@ namespace SportStore.WebUI.Infrastructure
             kernel.Bind<IProductRepository>().ToConstant(mock.Object);
             */
 
-            EmailSettings emailSettings = new EmailSettings
-            {
-                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
-            };
+            // Debug : ninject 삭제
+            //EmailSettings emailSettings = new EmailSettings
+            //{
+            //    WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+            //};
 
-            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
-                .WithConstructorArgument("settings", emailSettings);
-            kernel.Bind<IProductRepository>().To<EFProductRepository>();
+            //kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+            //    .WithConstructorArgument("settings", emailSettings);
+            //kernel.Bind<IProductRepository>().To<EFProductRepository>();
         }
     }
 }
