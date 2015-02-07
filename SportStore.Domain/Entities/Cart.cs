@@ -19,12 +19,12 @@ namespace SportStore.Domain.Entities
                 lineCollection.Add(new CartLine
                 {
                     Product = product,
-                    Quanatity = quantity
+                    Quantity = quantity
                 });
             }
             else
             {
-                line.Quanatity += quantity;
+                line.Quantity += quantity;
             }
         }
 
@@ -35,7 +35,7 @@ namespace SportStore.Domain.Entities
 
         public decimal ComputeTotalValue()
         {
-            return lineCollection.Sum(q => q.Product.Price*q.Quanatity);
+            return lineCollection.Sum(q => q.Product.Price*q.Quantity);
         }
 
         public void Clear()
@@ -52,6 +52,6 @@ namespace SportStore.Domain.Entities
     public class CartLine
     {
         public Product Product { get; set; }
-        public int Quanatity { get; set; }
+        public int Quantity { get; set; }
     }
 }
