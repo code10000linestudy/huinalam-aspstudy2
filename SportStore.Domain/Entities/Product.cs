@@ -13,5 +13,18 @@ namespace SportStore.Domain.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string Category { get; set; }
+
+        public bool IsValid
+        {
+            get
+            {
+                if (Name == null ||
+                    Description == null ||
+                    Price == 0 ||
+                    Category == null)
+                    return false;
+                return true;
+            }
+        }
     }
 }
