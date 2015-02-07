@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -48,6 +49,14 @@ namespace SportStore.WebUI.Infrastructure
             // 항상 동일한 Mock 개체를 사용하여 IProductRepository 인터페이스에 대한 요청을 만족시키게 된다.
             kernel.Bind<IProductRepository>().ToConstant(mock.Object);
             */
+
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
         }
     }
