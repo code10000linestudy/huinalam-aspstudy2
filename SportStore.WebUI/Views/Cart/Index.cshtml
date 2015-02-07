@@ -4,8 +4,14 @@
     ViewBag.TItle = "Sprts Store: Your Cart";
 }
 
+<style>
+    #cartTable td {
+        vertical-align: middle;
+    }
+</style>
+
 <h2>Your Chart</h2>
-<table class="table">
+<table id="cartTable" class="table">
     <thead>
         <tr>
             <th>Quauntity</th>
@@ -22,7 +28,15 @@
                 <td class="text-left">@line.Product.Name</td>
                 <td class="text-right">@line.Product.Price.ToString("c")</td>
                 <td class="text-right">
-                    @((line.Quantity*line.Product.Price).ToString("c"))
+                    @((line.Quantity * line.Product.Price).ToString("c"))
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "cart"))
+                    {
+                        @Html.Hidden("ProductId", line.Product.ProductID)
+                        @Html.HiddenFor( x=> x.ReturnUrl)
+                        <input class="btn btn-sm btn-warning" type="submit" value="Remove"/>
+                    }
                 </td>
             </tr>
         }
@@ -43,13 +57,13 @@
 
 @*<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>*@
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+    </html>*@
